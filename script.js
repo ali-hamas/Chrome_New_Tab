@@ -134,31 +134,21 @@ function containerBlur() {
 
 // <--------------------------------  Time  Setting  -------------------------------->
 
-// Time Container Visibility
+// Time Container Display
 let timeCheckbox = document.getElementById("time-checkbox"),
   timeContainer = document.getElementById("time-container");
 
-timeCheckbox.addEventListener("change", timeContVisibility);
-function timeContVisibility() {
-  const timeContHeight = timeCheckbox.checked ? "130px" : "0";
-  const timeContPaddingTop = timeCheckbox.checked ? "20px" : "0";
-  const timeContMarginBottom = timeCheckbox.checked ? "15px" : "0";
-
-  timeContainer.style.height = timeContHeight;
-  timeContainer.style.paddingTop = timeContPaddingTop;
-  timeContainer.style.marginBottom = timeContMarginBottom;
-  if (timeCheckbox.checked === false) {
-    localStorage.setItem(
-      "timeContVisibility",
-      JSON.stringify({
-        timeContHeight,
-        timeContPaddingTop,
-        timeContMarginBottom,
-        timeCheckValue: timeCheckbox.checked,
-      })
-    );
+timeCheckbox.addEventListener("change", timeContainerDisplay);
+function timeContainerDisplay() {
+  if (timeCheckbox.checked) {
+    timeContainer.style.display = "flex";
+    timeContainer.style.height = "130px";
+    timeContainer.style.paddingTop = "20px";
+    localStorage.setItem("timeDisplay", "show");
   } else {
-    localStorage.removeItem("timeContVisibility");
+    timeContainer.style.height = "0";
+    timeContainer.style.paddingTop = "0";
+    localStorage.setItem("timeDisplay", "hide");
   }
 }
 
@@ -178,29 +168,19 @@ function timeFormat() {
 
 // <--------------------------------  Message  Setting  -------------------------------->
 
-// Message Container Visibility
+// Message Container Display
 let msgCheckbox = document.getElementById("msg-checkbox");
 let msgContainer = document.getElementById("msg-container");
 
-msgCheckbox.addEventListener("change", msgContVisibility);
-function msgContVisibility() {
-  const msgContHeight = msgCheckbox.checked ? "60px" : "0";
-  const msgContMarginBottom = msgCheckbox.checked ? "15px" : "0";
-
-  msgContainer.style.height = msgContHeight;
-  msgContainer.style.marginBottom = msgContMarginBottom;
-
-  if (msgCheckbox.checked === false) {
-    localStorage.setItem(
-      "msgContVisibility",
-      JSON.stringify({
-        msgContHeight,
-        msgContMarginBottom,
-        msgChecked: msgCheckbox.checked,
-      })
-    );
+msgCheckbox.addEventListener("change", msgContainerDisplay);
+function msgContainerDisplay() {
+  if (msgCheckbox.checked) {
+    msgContainer.style.display = "block";
+    msgContainer.style.height = "60px";
+    localStorage.setItem("msgDisplay", "show");
   } else {
-    localStorage.removeItem("msgContVisibility");
+    msgContainer.style.height = "0px";
+    localStorage.setItem("msgDisplay", "hide");
   }
 }
 
@@ -218,29 +198,19 @@ function nameChange() {
 
 // <--------------------------------  Search  Setting  -------------------------------->
 
-// Search Container Visibility
+// Search Container Display
 let searchCheckbox = document.getElementById("search-checkbox");
 let searchContainer = document.getElementById("search-container");
 
-searchCheckbox.addEventListener("change", searchContVisibility);
-function searchContVisibility() {
-  const searchContHeight = searchCheckbox.checked ? "50px" : "0";
-  const searchContMarginBottom = searchCheckbox.checked ? "15px" : "0";
-
-  searchContainer.style.height = searchContHeight;
-  searchContainer.style.marginBottom = searchContMarginBottom;
-
-  if (searchCheckbox.checked === false) {
-    localStorage.setItem(
-      "searchContVisibility",
-      JSON.stringify({
-        searchContHeight,
-        searchContMarginBottom,
-        searchChecked: searchCheckbox.checked,
-      })
-    );
+searchCheckbox.addEventListener("change", searchContainerDisplay);
+function searchContainerDisplay() {
+  if (searchCheckbox.checked) {
+    searchContainer.style.display = "block";
+    searchContainer.style.height = "50px";
+    localStorage.setItem("searchDisplay", "show");
   } else {
-    localStorage.removeItem("searchContVisibility");
+    searchContainer.style.height = "0px";
+    localStorage.setItem("searchDisplay", "hide");
   }
 }
 

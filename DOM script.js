@@ -12,19 +12,18 @@ document.addEventListener("DOMContentLoaded", function () {
     containerBlur();
   }
 
-  // Time Container Visibility
-  const savedTimeVisibility = localStorage.getItem("timeContVisibility");
-  if (savedTimeVisibility !== null) {
-    const {
-      timeContHeight,
-      timeContPaddingTop,
-      timeContMarginBottom,
-      timeCheckValue,
-    } = JSON.parse(savedTimeVisibility);
-    timeContainer.style.height = timeContHeight;
-    timeContainer.style.paddingTop = timeContPaddingTop;
-    timeContainer.style.marginBottom = timeContMarginBottom;
-    timeCheckbox.checked = timeCheckValue;
+  // <--------------------------------  Time  Setting  -------------------------------->
+
+  // Time Container Display
+  const savedTimeDisplay = localStorage.getItem("timeDisplay");
+  if (savedTimeDisplay !== null) {
+    if (savedTimeDisplay === "show") {
+      timeCheckbox.checked = true;
+      timeContainer.style.display = "flex";
+    } else {
+      timeCheckbox.checked = false;
+      timeContainer.style.display = "none";
+    }
   }
 
   // Time Format
@@ -35,14 +34,18 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Message Container Visibility
-  const savedMsgVisibility = localStorage.getItem("msgContVisibility");
-  if (savedMsgVisibility !== null) {
-    const { msgContHeight, msgContMarginBottom, msgChecked } =
-      JSON.parse(savedMsgVisibility);
-    msgContainer.style.height = msgContHeight;
-    msgContainer.style.marginBottom = msgContMarginBottom;
-    msgCheckbox.checked = msgChecked;
+  // <--------------------------------  Message  Setting  -------------------------------->
+
+  // Message Container Display
+  const savedMsgDisplay = localStorage.getItem("msgDisplay");
+  if (savedMsgDisplay !== null) {
+    if (savedMsgDisplay === "show") {
+      msgCheckbox.checked = true;
+      msgContainer.style.display = "block";
+    } else {
+      msgCheckbox.checked = false;
+      msgContainer.style.display = "none";
+    }
   }
   // Message Name
   const savedName = localStorage.getItem("Name");
@@ -51,14 +54,18 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("name-input").value = savedName;
   }
 
-  // Search Container Visibility
-  const savedSearchVisibility = localStorage.getItem("searchContVisibility");
-  if (savedSearchVisibility !== null) {
-    const { searchContHeight, searchContMarginBottom, searchChecked } =
-      JSON.parse(savedSearchVisibility);
-    searchContainer.style.height = searchContHeight;
-    searchContainer.style.marginBottom = searchContMarginBottom;
-    searchCheckbox.checked = searchChecked;
+  // <--------------------------------  Search  Setting  -------------------------------->
+
+  // Search Container Display
+  const savedSearchDisplay = localStorage.getItem("searchDisplay");
+  if (savedSearchDisplay !== null) {
+    if (savedSearchDisplay === "show") {
+      searchContainer.style.display = "block";
+      searchCheckbox.checked = true;
+    } else {
+      searchContainer.style.display = "none";
+      searchCheckbox.checked = false;
+    }
   }
 
   // New Tab Search
