@@ -334,16 +334,16 @@ function iconCorners() {
 }
 
 // Shortcut Layout
-let layoutRadios = document.getElementsByClassName("layout-radios");
+let layoutRadios = document.querySelectorAll(".layout-radios");
 let radio4x2 = document.getElementById("radio-4x2");
 let radio5x2 = document.getElementById("radio-5x2");
 let radio6x2 = document.getElementById("radio-6x2");
 let radio4x3 = document.getElementById("radio-4x3");
 let radio5x3 = document.getElementById("radio-5x3");
 let radio6x3 = document.getElementById("radio-6x3");
-for (let index = 0; index < layoutRadios.length; index++) {
-  layoutRadios[index].addEventListener("change", layoutFunction);
-}
+layoutRadios.forEach((element) => {
+  element.addEventListener("change", layoutFunction);
+});
 function layoutFunction() {
   if (radio4x2.checked) {
     shortcutContainer.style.gridTemplate = "repeat(2, 100px) / repeat(4, 1fr)";
@@ -371,6 +371,20 @@ function layoutFunction() {
     localStorage.setItem("shortcutLayout", "radio5x2.checked");
   }
 }
+
+// Select Shortuts to show
+let allShortcuts = document.querySelectorAll(".show-checkbox");
+allShortcuts.forEach((element) => {
+  element.addEventListener("change", showShortcuts);
+});
+let whattsappRadio = document.getElementById("radio-whatsapp");
+let whattsappShortcut = document.getElementById("whatsapp-shortcut");
+function showShortcuts() {
+  whattsappRadio.checked
+    ? (whattsappShortcut.style.display = "flex")
+    : (whattsappShortcut.style.display = "none");
+}
+
 // <--------------------------------  General  Setting  -------------------------------->
 
 function hoverOpen(event) {

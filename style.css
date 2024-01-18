@@ -131,7 +131,7 @@ form input[type="search"] {
     transition: all .3s ease;
 }
 
-#shortcut-container .shortcut {
+.shortcut {
     height: 100px;
     gap: 8px;
     border-radius: 5px;
@@ -141,9 +141,10 @@ form input[type="search"] {
     flex-direction: column;
     background-color: transparent;
     overflow: hidden;
+    cursor: pointer;
 }
 
-#shortcut-container .shortcut:hover {
+.shortcut:hover {
     background: rgb(255, 255, 255, .35);
     backdrop-filter: blur(10px);
 }
@@ -159,6 +160,10 @@ form input[type="search"] {
     overflow: hidden;
 }
 
+.shortcut-icon img {
+    pointer-events: none;
+}
+
 .shortcut .shortcut-title {
     font-size: 13px;
     text-overflow: ellipsis;
@@ -166,22 +171,8 @@ form input[type="search"] {
     overflow: hidden;
     width: 80%;
     text-align: center;
+    text-transform: capitalize;
 }
-
-/* Google Apps */
-#gApps-container {
-    position: absolute;
-    top: 40px;
-    right: 40px;
-}
-
-#gApps-container #open-gApps {
-    height: 30px;
-    filter: invert(90%);
-    cursor: pointer;
-}
-
-
 
 /* Setting */
 #open-setting {
@@ -276,7 +267,7 @@ h3.setting-tile-heading {
 
 .hour-format-radio+label,
 .search-engine-radio+label {
-    padding: 2px 4px;
+    padding: 2px;
     border-radius: 5px;
     width: 75px;
     text-align: center;
@@ -284,6 +275,10 @@ h3.setting-tile-heading {
     cursor: pointer;
     background-color: transparent;
     transition: all .3s ease;
+}
+
+.search-engine-radio+label {
+    font-size: 14px;
 }
 
 .hour-format-radio:checked+label,
@@ -303,7 +298,7 @@ h3.setting-tile-heading {
 }
 
 /* Shortcut Layout */
-.setting-tile-layout {
+.shortcut-layout-setting {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
@@ -311,9 +306,8 @@ h3.setting-tile-heading {
 }
 
 .layout-radios+label {
-    padding: 4px 4px;
+    padding: 4px;
     border-radius: 5px;
-    width: 90px;
     text-align: center;
     border: 1px solid white;
     cursor: pointer;
@@ -324,6 +318,45 @@ h3.setting-tile-heading {
 .layout-radios:checked+.layout-labels {
     background-color: #f7a707;
 }
+
+/* Shortcut show */
+.shortcut-show-setting {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.show-checkbox+label {
+    padding: 4px 5px;
+    font-size: 13px;
+    border-radius: 5px;
+    text-align: left;
+    border: 1px solid white;
+    cursor: pointer;
+    background-color: transparent;
+    transition: all .3s ease;
+    position: relative;
+}
+
+.select-checkbox {
+    width: 10px;
+    height: 10px;
+    border: 1px solid white;
+    border-radius: 50%;
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    transition: all .3s ease;
+}
+
+.show-checkbox:checked+label .select-checkbox {
+    background-color: #f7a707;
+    border: 1px solid #f7a707;
+}
+
 
 /* Reset Setting */
 .setting-reset {

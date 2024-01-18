@@ -31,7 +31,7 @@
                     <img src="https://infinity-permanent.infinitynewtab.com/infinity/search-add/bing_new.png?imageMogr2/thumbnail/240x/format/webp/blur/1x0/quality/100|imageslim"
                         id="bing-logo" width="30px">
                 </label>
-                <input type="search" id="search-input" minlength="1" placeholder="Search Google">
+                <input type="search" id="search-input" minlength="1" placeholder="Search">
             </form>
         </div>
         <!-- Shortcut Container -->
@@ -90,42 +90,19 @@
                 </div>
                 <div class="shortcut-title">Gmail</div>
             </a>
-            <a href="https://messenger.com/" class="shortcut">
+            <a class="shortcut" id="new-shortcut">
                 <div class="shortcut-icon">
-                    <img src="https://cdn-icons-png.flaticon.com/128/5968/5968771.png" width="60%">
+                    <img src="https://cdn-icons-png.flaticon.com/128/3524/3524388.png" width="40%">
                 </div>
-                <div class="shortcut-title">Messenger</div>
+                <div class="shortcut-title">Add New</div>
             </a>
-            <a href="https://messenger.com/" class="shortcut">
+            <!-- <a href="https://drive.google.com/" class="shortcut" id="drive-shortcut">
                 <div class="shortcut-icon">
-                    <img src="https://cdn-icons-png.flaticon.com/128/5968/5968771.png" width="60%">
+                    <img src="https://cdn-icons-png.flaticon.com/128/5968/5968523.png" width="70%">
                 </div>
-                <div class="shortcut-title">Messenger</div>
-            </a>
-            <a href="https://messenger.com/" class="shortcut">
-                <div class="shortcut-icon">
-                    <img src="https://cdn-icons-png.flaticon.com/128/5968/5968771.png" width="60%">
-                </div>
-                <div class="shortcut-title">Messenger</div>
-            </a>
-            <a href="https://messenger.com/" class="shortcut">
-                <div class="shortcut-icon">
-                    <img src="https://cdn-icons-png.flaticon.com/128/5968/5968771.png" width="60%">
-                </div>
-                <div class="shortcut-title">Messenger</div>
-            </a>
+                <div class="shortcut-title">Drive</div>
+            </a> -->
         </div>
-        <!-- <div id="gApps-container">
-            <img src="https://cdn-icons-png.flaticon.com/128/17/17704.png" id="open-gApps">
-            <div id="google-apps">
-                <a href="" class="gApp-shortcut">
-                    <div class="gApps-icon">
-                        <img src="https://cdn-icons-png.flaticon.com/128/2875/2875430.png">
-                    </div>
-                    <div class="gApp-title">Account</div>
-                </a>
-            </div>
-        </div> -->
     </div>
     <!----------------------------------------  Setting  ---------------------------------------->
     <div id="open-setting">
@@ -252,8 +229,8 @@
             </div>
             <!-- ---------------------------Shotcut Setting Section--------------------------- -->
             <div class="setting-section">
-                <!-- Shortcut visibility -->
                 <h2 class="setting-sec-heading">Shortcuts</h2>
+                <!-- Shortcut visibility -->
                 <div class="setting-tile">
                     <div class="setting-tile-content">
                         <h3 class="setting-tile-heading">Shortcuts</h3>
@@ -285,27 +262,25 @@
                         <div id="icon-value">50%</div>
                     </div>
                 </div>
-
                 <!-- Shortcut Layout -->
                 <div class="setting-tile setting-tile-withHeading">
                     <h3 class="setting-tile-heading">Layout</h3>
-                    <div class="setting-tile-layout">
-                        <input type="radio" name="layout" id="radio-4x2" class="layout-radios">
+                    <div class="shortcut-layout-setting">
+                        <input type="radio" name="layout" value="4x2" id="radio-4x2" class="layout-radios">
                         <label for="radio-4x2" class="layout-labels">4 x 2</label>
-                        <input type="radio" name="layout" id="radio-5x2" class="layout-radios" checked>
+                        <input type="radio" name="layout" value="5x2" id="radio-5x2" class="layout-radios" checked>
                         <label for="radio-5x2" class="layout-labels">5 x 2</label>
-                        <input type="radio" name="layout" id="radio-6x2" class="layout-radios">
+                        <input type="radio" name="layout" value="6x2" id="radio-6x2" class="layout-radios">
                         <label for="radio-6x2" class="layout-labels">6 x 2</label>
-                        <input type="radio" name="layout" id="radio-4x3" class="layout-radios">
+                        <input type="radio" name="layout" value="4x3" id="radio-4x3" class="layout-radios">
                         <label for="radio-4x3" class="layout-labels">4 x 3</label>
-                        <input type="radio" name="layout" id="radio-5x3" class="layout-radios">
+                        <input type="radio" name="layout" value="5x3" id="radio-5x3" class="layout-radios">
                         <label for="radio-5x3" class="layout-labels">5 x 3</label>
-                        <input type="radio" name="layout" id="radio-6x3" class="layout-radios">
+                        <input type="radio" name="layout" value="6x3" id="radio-6x3" class="layout-radios">
                         <label for="radio-6x3" class="layout-labels">6 x 3</label>
                     </div>
                 </div>
             </div>
-
 
             <!-- ---------------------------General Setting Section--------------------------- -->
             <div class="setting-section">
