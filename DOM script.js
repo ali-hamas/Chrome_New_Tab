@@ -76,21 +76,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Search Logo
   let savedSearchLogo = localStorage.getItem("searchLogo");
-  if (savedSearchLogo === "true") {
-    bingRadio.checked = true;
-    searchLogoChange();
+  if (savedSearchLogo !== null) {
+    if (savedSearchLogo === "bing") {
+      bingRadio.checked = true;
+      searchLogoChange();
+    }
   }
 
   // Shortcut Container Visibility
-  const savedShortcutVisibility = localStorage.getItem(
-    "shortcutContVisibility"
-  );
-  if (savedShortcutVisibility !== null) {
-    const { shortcutContHeight, shortcutChecked } = JSON.parse(
-      savedShortcutVisibility
-    );
-    shortcutContainer.style.height = shortcutContHeight;
-    shortcutCheckbox.checked = shortcutChecked;
+  const savedShortcutDisplay = localStorage.getItem("shortcutDisplay");
+  if (savedShortcutDisplay !== null) {
+    if (savedShortcutDisplay === "show") {
+      shortcutContainer.style.display = "grid";
+      shortcutCheckbox.checked = true;
+    } else {
+      shortcutContainer.style.display = "none";
+      shortcutCheckbox.checked = false;
+    }
   }
 
   // New Tab Shortcuts

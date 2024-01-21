@@ -5,43 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clock</title>
-    <style>
-        input[type="radio"]+label {
-            color: #333;
-        }
-
-        input[type="radio"]:checked+label {
-            color: #00f;
-        }
-    </style>
 </head>
 
 <body>
-    <div class="radio-buttons">
-        <input type="radio" name="hello" id="hr12" onclick="check()">
-        <label for="hr12">12 Hr</label>
-        <input type="radio" name="hello" id="hr24" onclick="check()">
-        <label for="hr24">24 Hr</label>
-    </div>
-    <script>
-        function check() {
-            let hr12 = document.getElementById("hr12");
-            let hr24 = document.getElementById("hr24");
-            console.log(`Hr12 checked is = ${hr12.checked}`)
-            console.log(`Hr24 checked is = ${hr24.checked}`)
-        }
-    </script>
-
-
-
-
-    <!-- <div id="clock-container">
+    <div id="clock-container">
         <span id="clock"></span>
         <span id="zone"></span>
-    </div> -->
+    </div>
 
 
-    <!-- <div id="MyClockDisplay" class="clock" onload="showTime()"></div>
+    <div id="MyClockDisplay" class="clock" onload="showTime()"></div>
     <script>
         function showTime() {
             let date = new Date();
@@ -66,4 +39,4 @@
         }
 
         showTime();
-    </script> -->
+    </script>

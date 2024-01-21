@@ -240,7 +240,7 @@ let newTabSearchCheckbox = document.getElementById("newTab-search-checkbox");
 newTabSearchCheckbox.addEventListener("change", newTabSearchFunction);
 function newTabSearchFunction() {
   if (newTabSearchCheckbox.checked) {
-    localStorage.setItem("newTabSearch", newTabSearchCheckbox.checked);
+    localStorage.setItem("newTabSearch", "true");
   } else {
     localStorage.removeItem("newTabSearch");
   }
@@ -257,7 +257,7 @@ function searchLogoChange() {
   if (bingRadio.checked) {
     bingLogo.style.display = "block";
     googleLogo.style.display = "none";
-    localStorage.setItem("searchLogo", bingRadio.checked);
+    localStorage.setItem("searchLogo", "bing");
   } else {
     bingLogo.style.display = "none";
     googleLogo.style.display = "block";
@@ -271,24 +271,44 @@ function searchLogoChange() {
 let shortcutCheckbox = document.getElementById("shortcut-checkbox");
 let shortcutContainer = document.getElementById("shortcut-container");
 
-shortcutCheckbox.addEventListener("change", shortcutContVisibility);
-function shortcutContVisibility() {
-  const shortcutContHeight = shortcutCheckbox.checked ? "200px" : "0";
-
-  shortcutContainer.style.height = shortcutContHeight;
-
-  if (shortcutCheckbox.checked === false) {
-    localStorage.setItem(
-      "shortcutContVisibility",
-      JSON.stringify({
-        shortcutContHeight,
-        shortcutChecked: shortcutCheckbox.checked,
-      })
-    );
+shortcutCheckbox.addEventListener("change", shortcutContainerDisplay);
+function shortcutContainerDisplay() {
+  if (shortcutCheckbox.checked) {
+    shortcutContainer.style.display = "grid";
+    if (radio4x3.checked || radio5x3.checked || radio6x3.checked) {
+      shortcutContainer.style.height = "300px";
+    } else {
+      shortcutContainer.style.height = "200px";
+    }
+    localStorage.setItem("shortcutDisplay", "show");
   } else {
-    localStorage.removeItem("shortcutContVisibility");
+    shortcutContainer.style.height = "0px";
+    localStorage.setItem("shortcutDisplay", "hide");
   }
 }
+
+// Show Delete Shortcuts on right click
+let shortcutDelete = document.querySelectorAll(".shortcut-delete");
+let shortcuts = document.querySelectorAll(".shortcut");
+shortcutContainer.addEventListener("contextmenu", function (event) {
+  event.preventDefault();
+  shortcutDelete.forEach((element) => {
+    element.style.transform = "scale(1)";
+    shortcuts.forEach((alpha) => {
+      alpha.style.animation = "rotate .4s linear infinite";
+    });
+  });
+});
+
+// Hide Delete Shortcuts on right click
+document.body.addEventListener("click", function () {
+  shortcutDelete.forEach((element) => {
+    element.style.transform = "scale(0)";
+    shortcuts.forEach((alpha) => {
+      alpha.style.animation = "none";
+    });
+  });
+});
 
 // Open shortcuts in new tab
 let newTabShortcutCheckbox = document.getElementById("newTab-checkbox");
@@ -372,18 +392,20 @@ function layoutFunction() {
   }
 }
 
-// Select Shortuts to show
-let allShortcuts = document.querySelectorAll(".show-checkbox");
-allShortcuts.forEach((element) => {
-  element.addEventListener("change", showShortcuts);
+// Add New Shortcut
+const uploadFile = document.getElementById("upload-file");
+const previewImage = document.getElementById("preview-img");
+
+uploadFile.addEventListener("change", function () {
+  const file = this.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.addEventListener("load", function () {
+      previewImage.src = reader.result;
+    });
+    reader.readAsDataURL(file);
+  }
 });
-let whattsappRadio = document.getElementById("radio-whatsapp");
-let whattsappShortcut = document.getElementById("whatsapp-shortcut");
-function showShortcuts() {
-  whattsappRadio.checked
-    ? (whattsappShortcut.style.display = "flex")
-    : (whattsappShortcut.style.display = "none");
-}
 
 // <--------------------------------  General  Setting  -------------------------------->
 
