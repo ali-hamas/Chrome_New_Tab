@@ -229,14 +229,13 @@ body {
     right: 15px;
     top: 50%;
     transform: translateY(-50%);
-    width: 400px;
-    /* width: 0px; */
+    width: 0px;
     overflow: hidden;
     transition: all .3s ease;
 }
 
 .add-shortcut-box-inner {
-    width: 100%;
+    width: 400px;
     height: 100%;
     padding: 20px;
     border-radius: 10px;
@@ -257,35 +256,14 @@ body {
     line-height: 30px;
 }
 
-.add-shortcut-box-inner .file-icon-div {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-}
-
-.file-icon-div .shortcut-icon {
+.add-shortcut-box-inner .shortcut-icon {
     width: 70px;
     height: 70px;
     object-fit: cover;
 }
 
-.file-icon-div .shortcut-icon img {
-    /* transform: scale(1); */
+.add-shortcut-box-inner .shortcut-icon img {
     width: 90%;
-}
-
-.add-shortcut-box-inner input[type="file"] {
-    display: none;
-}
-
-.add-shortcut-box-inner .upload-file-label {
-    padding: 5px 10px;
-    font-size: 14px;
-    border-radius: 5px;
-    background-color: #f7a707;
-    border: 1px solid #f7a707;
-    cursor: pointer;
-    margin-top: 30px;
 }
 
 .add-shortcut-box-inner .add-shortcut-form {
@@ -302,7 +280,7 @@ body {
     outline: none;
     border: none;
     border-bottom: 2px solid white;
-    font-size: 18px;
+    font-size: 16px;
     padding: 5px;
     width: 90%;
     text-align: center;
@@ -310,13 +288,14 @@ body {
 
 .add-shortcut-form input[type="text"] {
     text-transform: capitalize;
+    font-size: 18px;
 }
 
 ::placeholder {
     color: rgb(255, 255, 255, .7);
 }
 
-#done-shortcut-btn {
+#done-shortcut-btn:disabled {
     margin-top: 10px;
     padding: 3px;
     width: 90px;
@@ -325,7 +304,22 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 17px;
+    cursor: default;
     transition: all .3s ease;
+}
+
+#done-shortcut-btn {
+    margin-top: 10px;
+    padding: 3px;
+    width: 90px;
+    color: white;
+    background-color: #f7a707;
+    border: 1px solid #f7a707;
+    border-radius: 5px;
+    font-size: 17px;
+    cursor: pointer;
+    transition: all .3s ease;
+
 }
 
 /* Setting */

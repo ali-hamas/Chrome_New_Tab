@@ -36,70 +36,70 @@
         </div>
         <!-- Shortcut Container -->
         <div id="shortcut-container">
-            <a href="https://web.whatsapp.com/" class="shortcut">
+            <a href="https://web.whatsapp.com/" class="shortcut" draggable="true" title="WhatsApp">
                 <div class="shortcut-icon">
                     <img src="https://cdn-icons-png.flaticon.com/128/4423/4423697.png">
                 </div>
                 <div class="shortcut-title">WhatsApp</div>
                 <img class="shortcut-delete" src="https://cdn-icons-png.flaticon.com/128/1828/1828843.png" width="20px">
             </a>
-            <a href="https://youtube.com" class="shortcut">
+            <a href="https://youtube.com" class="shortcut" draggable="true" title="YouTube">
                 <div class="shortcut-icon">
                     <img src="https://cdn-icons-png.flaticon.com/128/1384/1384060.png">
                 </div>
                 <div class="shortcut-title">YouTube</div>
                 <img class="shortcut-delete" src="https://cdn-icons-png.flaticon.com/128/1828/1828843.png" width="20px">
             </a>
-            <a href="https://twitter.com" class="shortcut">
+            <a href="https://twitter.com" class="shortcut" draggable="true" title="Twitter">
                 <div class="shortcut-icon">
                     <img src="https://cdn-icons-png.flaticon.com/128/733/733579.png">
                 </div>
                 <div class="shortcut-title">Twitter</div>
                 <img class="shortcut-delete" src="https://cdn-icons-png.flaticon.com/128/1828/1828843.png" width="20px">
             </a>
-            <a href="https://instagram.com" class="shortcut instagram">
+            <a href="https://instagram.com" class="shortcut instagram" draggable="true" title="Instagram">
                 <div class="shortcut-icon">
                     <img src="https://cdn-icons-png.flaticon.com/128/3621/3621435.png">
                 </div>
                 <div class="shortcut-title">Instagram</div>
                 <img class="shortcut-delete" src="https://cdn-icons-png.flaticon.com/128/1828/1828843.png" width="20px">
             </a>
-            <a href="https://facebook.com" class="shortcut">
+            <a href="https://facebook.com" class="shortcut" draggable="true" title="Facebook">
                 <div class="shortcut-icon">
                     <img src="https://cdn-icons-png.flaticon.com/128/5968/5968764.png">
                 </div>
                 <div class="shortcut-title">Facebook</div>
                 <img class="shortcut-delete" src="https://cdn-icons-png.flaticon.com/128/1828/1828843.png" width="20px">
             </a>
-            <a href="https://linkedin.com" class="shortcut">
+            <a href="https://linkedin.com" class="shortcut" draggable="true" title="LinkedIn">
                 <div class="shortcut-icon">
                     <img src="https://cdn-icons-png.flaticon.com/128/145/145807.png">
                 </div>
                 <div class="shortcut-title">LinkedIn</div>
                 <img class="shortcut-delete" src="https://cdn-icons-png.flaticon.com/128/1828/1828843.png" width="20px">
             </a>
-            <a href="https://github.com" class="shortcut">
+            <a href="https://github.com" class="shortcut" draggable="true" title="GitHub">
                 <div class="shortcut-icon">
                     <img src="https://cdn-icons-png.flaticon.com/128/2111/2111425.png">
                 </div>
                 <div class="shortcut-title">GitHub</div>
                 <img class="shortcut-delete" src="https://cdn-icons-png.flaticon.com/128/1828/1828843.png" width="20px">
             </a>
-            <a href="https://chat.openai.com/" class="shortcut">
+            <a href="https://chat.openai.com/" class="shortcut" draggable="true" title="Chat GPT">
                 <div class="shortcut-icon">
                     <img src="https://cdn-icons-png.flaticon.com/128/11865/11865326.png">
                 </div>
                 <div class="shortcut-title">Chat GPT</div>
                 <img class="shortcut-delete" src="https://cdn-icons-png.flaticon.com/128/1828/1828843.png" width="20px">
             </a>
-            <a href="https://mail.google.com/" class="shortcut">
+            <a href="https://mail.google.com/" class="shortcut" draggable="true" title="Gmail">
                 <div class="shortcut-icon">
                     <img src="https://cdn-icons-png.flaticon.com/128/5968/5968534.png">
                 </div>
                 <div class="shortcut-title">Gmail</div>
                 <img class="shortcut-delete" src="https://cdn-icons-png.flaticon.com/128/1828/1828843.png" width="20px">
             </a>
-            <a id="new-shortcut">
+            <a id="new-shortcut" title="Add Shortcut">
                 <div class="shortcut-icon">
                     <img src="https://cdn-icons-png.flaticon.com/128/3524/3524388.png">
                 </div>
@@ -109,16 +109,12 @@
         <div id="add-shortcut-box">
             <div class="add-shortcut-box-inner">
                 <h2 class="add-shortcut-title">Add Shortcut</h2>
-                <div class="file-icon-div">
-                    <div class="shortcut-icon">
-                        <img id="preview-img" src="https://cdn-icons-png.flaticon.com/128/5968/5968534.png">
-                    </div>
-                    <input type="file" id="upload-file" accept="image/*">
-                    <label for="upload-file" class="upload-file-label">Upload Icon</label>
+                <div class="shortcut-icon">
+                    <img id="preview-img" src="https://cdn-icons-png.flaticon.com/128/1006/1006771.png">
                 </div>
-                <form class="add-shortcut-form">
-                    <input type="text" minlength="1" placeholder="Name" minlength="1" required>
-                    <input type="text" minlength="1" placeholder="URL" minlength="1" required>
+                <form class="add-shortcut-form" autocomplete="off">
+                    <input type="text" minlength="1" id="form-name-input" placeholder="Name" minlength="1" required>
+                    <input type="url" minlength="1" id="form-url-input" placeholder="URL" minlength="1" required>
                     <button type="submit" id="done-shortcut-btn" disabled>Done</button>
                 </form>
             </div>

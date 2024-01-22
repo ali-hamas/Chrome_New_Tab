@@ -105,6 +105,13 @@ window.onclick = function (event) {
     sureBox.style.height = "0px";
     sureBox.style.padding = "0px";
   }
+
+  // Hide New Shortcut
+  var clickInsideNewShortcutBox = event.target.closest("#add-shortcut-box");
+  var clickInsideNewShortcutBtn = event.target.closest("#new-shortcut");
+  if (!clickInsideNewShortcutBox && !clickInsideNewShortcutBtn) {
+    newShortcutBox.style.width = "0px";
+  }
 };
 
 // <--------------------------------  Wallpaper  Setting  -------------------------------->
@@ -287,29 +294,6 @@ function shortcutContainerDisplay() {
   }
 }
 
-// Show Delete Shortcuts on right click
-let shortcutDelete = document.querySelectorAll(".shortcut-delete");
-let shortcuts = document.querySelectorAll(".shortcut");
-shortcutContainer.addEventListener("contextmenu", function (event) {
-  event.preventDefault();
-  shortcutDelete.forEach((element) => {
-    element.style.transform = "scale(1)";
-    shortcuts.forEach((alpha) => {
-      alpha.style.animation = "rotate .4s linear infinite";
-    });
-  });
-});
-
-// Hide Delete Shortcuts on right click
-document.body.addEventListener("click", function () {
-  shortcutDelete.forEach((element) => {
-    element.style.transform = "scale(0)";
-    shortcuts.forEach((alpha) => {
-      alpha.style.animation = "none";
-    });
-  });
-});
-
 // Open shortcuts in new tab
 let newTabShortcutCheckbox = document.getElementById("newTab-checkbox");
 
@@ -392,19 +376,80 @@ function layoutFunction() {
   }
 }
 
-// Add New Shortcut
-const uploadFile = document.getElementById("upload-file");
-const previewImage = document.getElementById("preview-img");
-
-uploadFile.addEventListener("change", function () {
-  const file = this.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.addEventListener("load", function () {
-      previewImage.src = reader.result;
+// Show Delete Shortcuts on right click
+let shortcutDelete = document.querySelectorAll(".shortcut-delete");
+let shortcuts = document.querySelectorAll(".shortcut");
+shortcutContainer.addEventListener("contextmenu", function (event) {
+  event.preventDefault();
+  shortcutDelete.forEach((element) => {
+    element.style.transform = "scale(1)";
+    shortcuts.forEach((alpha) => {
+      alpha.style.animation = "rotate .4s linear infinite";
     });
-    reader.readAsDataURL(file);
+  });
+});
+
+// Hide Delete Shortcuts on right click
+document.body.addEventListener("click", function () {
+  shortcutDelete.forEach((element) => {
+    element.style.transform = "scale(0)";
+    shortcuts.forEach((alpha) => {
+      alpha.style.animation = "none";
+    });
+  });
+});
+
+// Hide New Shortcut box
+let newShortcutBox = document.getElementById("add-shortcut-box");
+let newShortcutBtn = document.getElementById("new-shortcut");
+document.addEventListener("click", showNewShortcutBox);
+function showNewShortcutBox(event) {
+  newShortcutBox.style.width = "400px";
+}
+
+// Form Validation
+let formNameInput = document.getElementById("form-name-input");
+let formUrlInput = document.getElementById("form-url-input");
+let addFormBtn = document.getElementById("done-shortcut-btn");
+
+formNameInput.addEventListener("input", formValidation);
+formUrlInput.addEventListener("input", formValidation);
+function formValidation() {
+  if (formNameInput.value.length > 0 && formUrlInput.value.length > 0) {
+    addFormBtn.disabled = false;
+  } else {
+    addFormBtn.disabled = true;
   }
+}
+
+// URL Icon Update
+const previewImage = document.getElementById("preview-img");
+let newShortcutIconUrl;
+formUrlInput.addEventListener("input", function () {
+  newShortcutIconUrl =
+    "https://s2.googleusercontent.com/s2/favicons?domain_url=" +
+    formUrlInput.value;
+  previewImage.src = newShortcutIconUrl;
+});
+
+// Add new shortcut
+let addShortcutForm = document.querySelector(".add-shortcut-form");
+let newShortcut;
+addShortcutForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+  newShortcut = document.createElement("a");
+  shortcutContainer.append(newShortcut);
+  newShortcut.outerHTML = `<a href="${formUrlInput.value}" class="shortcut" draggable="true" title="${formNameInput.value}">
+      <div class="shortcut-icon">
+          <img src="${newShortcutIconUrl}">
+      </div>
+      <div class="shortcut-title">${formNameInput.value}</div>
+        <img class="shortcut-delete" src="https://cdn-icons-png.flaticon.com/128/1828/1828843.png" width="20px">
+  </a>`;
+  addShortcutForm.reset();
+  addFormBtn.disabled = true;
+  previewImage.src = "https://cdn-icons-png.flaticon.com/128/1006/1006771.png";
+  newShortcutBox.style.width = "0px";
 });
 
 // <--------------------------------  General  Setting  -------------------------------->
