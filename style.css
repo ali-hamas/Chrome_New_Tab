@@ -47,7 +47,7 @@ body {
     font-size: 60px;
 }
 
-/* name container */
+/* msg container */
 #msg-container {
     height: 60px;
     margin-bottom: 15px;
@@ -141,6 +141,7 @@ body {
     flex-direction: column;
     background-color: transparent;
     position: relative;
+    cursor: pointer;
 }
 
 .shortcut:hover {
@@ -191,10 +192,6 @@ body {
     width: 100%;
 }
 
-.instagram .shortcut-icon img {
-    width: 140%;
-}
-
 #new-shortcut .shortcut-icon img {
     width: 80%;
 }
@@ -226,9 +223,9 @@ body {
 /* Add new Shortcut */
 #add-shortcut-box {
     position: fixed;
-    right: 15px;
+    left: 50%;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translate(-50%, -50%);
     width: 0px;
     overflow: hidden;
     transition: all .3s ease;
@@ -274,29 +271,47 @@ body {
     width: 80%;
 }
 
-.add-shortcut-form input[type="text"],
-.add-shortcut-form input[type="url"] {
+.add-shortcut-form .input-field {
+    width: 100%;
+    position: relative;
+}
+
+.add-shortcut-form input[type="text"].shortcut-form-fields {
     background-color: transparent;
     outline: none;
-    border: none;
-    border-bottom: 2px solid white;
-    font-size: 16px;
-    padding: 5px;
-    width: 90%;
-    text-align: center;
+    border: 2px solid white;
+    border-radius: 5px;
+    padding: 15px 5px 5px 5px;
+    width: 100%;
+    font-size: 15px;
+    line-height: 16px;
 }
 
-.add-shortcut-form input[type="text"] {
-    text-transform: capitalize;
-    font-size: 18px;
+.placeholder-text {
+    position: absolute;
+    left: 7px;
+    top: 32%;
+    top: 20%;
+    color: #ccc;
+    transition: all .3s ease;
 }
 
-::placeholder {
-    color: rgb(255, 255, 255, .7);
+.http-error {
+    color: red;
+    font-size: 12px;
+    position: relative;
+    display: none;
+}
+
+.shortcut-form-fields:focus+.placeholder-text,
+.shortcut-form-fields:valid+.placeholder-text {
+    top: 2px;
+    font-size: 10px;
+    color: #ccc;
 }
 
 #done-shortcut-btn:disabled {
-    margin-top: 10px;
+    margin-top: 0px;
     padding: 3px;
     width: 90px;
     color: #ccc;
@@ -309,7 +324,7 @@ body {
 }
 
 #done-shortcut-btn {
-    margin-top: 10px;
+    margin-top: 0px;
     padding: 3px;
     width: 90px;
     color: white;

@@ -110,7 +110,7 @@ window.onclick = function (event) {
   var clickInsideNewShortcutBox = event.target.closest("#add-shortcut-box");
   var clickInsideNewShortcutBtn = event.target.closest("#new-shortcut");
   if (!clickInsideNewShortcutBox && !clickInsideNewShortcutBtn) {
-    newShortcutBox.style.width = "0px";
+    newShortcutFormReset();
   }
 };
 
@@ -376,59 +376,92 @@ function layoutFunction() {
   }
 }
 
-// Show Delete Shortcuts on right click
-let shortcutDelete = document.querySelectorAll(".shortcut-delete");
-let shortcuts = document.querySelectorAll(".shortcut");
-shortcutContainer.addEventListener("contextmenu", function (event) {
-  event.preventDefault();
-  shortcutDelete.forEach((element) => {
-    element.style.transform = "scale(1)";
-    shortcuts.forEach((alpha) => {
-      alpha.style.animation = "rotate .4s linear infinite";
-    });
-  });
-});
+// // Show Delete Shortcuts on right click
+// let shortcutDelete = document.querySelectorAll(".shortcut-delete");
+// let shortcuts = document.querySelectorAll(".shortcut");
+// shortcutContainer.addEventListener("contextmenu", function (event) {
+//   event.preventDefault();
+//   // Delete Shortcuts
+//   shortcutDelete.forEach((element) => {
+//     element.style.transform = "scale(1)";
+//   });
+//   // shortcuts
+//   shortcuts.forEach((alpha) => {
+//     alpha.style.animation = "rotate .4s linear infinite";
+//     alpha.removeAttribute("href");
+//     alpha.addEventListener("click", function (e) {
+//       console.log(e.target);
+//       event.preventDefault();
+//       alpha.remove();
+//     });
+//   });
+// });
 
-// Hide Delete Shortcuts on right click
-document.body.addEventListener("click", function () {
-  shortcutDelete.forEach((element) => {
-    element.style.transform = "scale(0)";
-    shortcuts.forEach((alpha) => {
-      alpha.style.animation = "none";
-    });
-  });
-});
+// // Hide Delete Shortcuts on right click
+// document.body.addEventListener("click", function (e) {
+//   let clickInsideShortcutContainer = e.target.closest("#shortcut-container");
+//   if (!clickInsideShortcutContainer) {
+//     console.log("body clicked");
+//     shortcutDelete.forEach((element) => {
+//       element.style.transform = "scale(0)";
+//     });
+//     shortcuts.forEach((alpha) => {
+//       alpha.style.animation = "none";
+//       // alpha.setAttribute("href", "");
+//       alpha.removeEventListener("click", () => {
+//         console.log("remove");
+//       });
+//     });
+//   }
+// });
 
-// Hide New Shortcut box
+// Show New Shortcut box
 let newShortcutBox = document.getElementById("add-shortcut-box");
 let newShortcutBtn = document.getElementById("new-shortcut");
 document.addEventListener("click", showNewShortcutBox);
 function showNewShortcutBox(event) {
   newShortcutBox.style.width = "400px";
+  container.style.backdropFilter = "blur(20px)";
+  timeContainer.style.display = "none";
+  msgContainer.style.display = "none";
+  searchContainer.style.display = "none";
+  shortcutContainer.style.display = "none";
+  openSettingBtn.style.visibility = "hidden";
 }
 
-// Form Validation
+// Form Button disable
 let formNameInput = document.getElementById("form-name-input");
 let formUrlInput = document.getElementById("form-url-input");
 let addFormBtn = document.getElementById("done-shortcut-btn");
 
-formNameInput.addEventListener("input", formValidation);
-formUrlInput.addEventListener("input", formValidation);
-function formValidation() {
-  if (formNameInput.value.length > 0 && formUrlInput.value.length > 0) {
+formNameInput.addEventListener("input", formButtomValidation);
+formUrlInput.addEventListener("input", formButtomValidation);
+formUrlInput.addEventListener("input", httpValidation);
+function formButtomValidation() {
+  formNameInput.value.length > 0
+    ? (addFormBtn.disabled = false)
+    : (addFormBtn.disabled = true);
+  formUrlInput.value.length > 0
+    ? (addFormBtn.disabled = false)
+    : (addFormBtn.disabled = true);
+}
+function httpValidation() {
+  let formUrlValue = formUrlInput.value;
+  if (formUrlValue.includes("https://") || formUrlValue.includes("http://")) {
     addFormBtn.disabled = false;
+    document.querySelector(".http-error").style.display = "none";
   } else {
     addFormBtn.disabled = true;
+    document.querySelector(".http-error").style.display = "block";
   }
 }
 
 // URL Icon Update
 const previewImage = document.getElementById("preview-img");
-let newShortcutIconUrl;
+let newShortcutIconUrl =
+  "https://cdn-icons-png.flaticon.com/128/1006/1006771.png";
 formUrlInput.addEventListener("input", function () {
-  newShortcutIconUrl =
-    "https://s2.googleusercontent.com/s2/favicons?domain_url=" +
-    formUrlInput.value;
+  newShortcutIconUrl = `https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${formUrlInput.value}&size=256`;
   previewImage.src = newShortcutIconUrl;
 });
 
@@ -438,19 +471,34 @@ let newShortcut;
 addShortcutForm.addEventListener("submit", function (event) {
   event.preventDefault();
   newShortcut = document.createElement("a");
-  shortcutContainer.append(newShortcut);
-  newShortcut.outerHTML = `<a href="${formUrlInput.value}" class="shortcut" draggable="true" title="${formNameInput.value}">
-      <div class="shortcut-icon">
-          <img src="${newShortcutIconUrl}">
-      </div>
-      <div class="shortcut-title">${formNameInput.value}</div>
-        <img class="shortcut-delete" src="https://cdn-icons-png.flaticon.com/128/1828/1828843.png" width="20px">
+  newShortcutBtn.insertAdjacentElement("beforebegin", newShortcut);
+  newShortcut.outerHTML = `<a href="${formUrlInput.value}" class="shortcut" draggable="true">
+  <div class="shortcut-icon">
+  <img src="${newShortcutIconUrl}">
+  </div>
+  <div class="shortcut-title">${formNameInput.value}</div>
+  <img class="shortcut-delete" src="https://cdn-icons-png.flaticon.com/128/1828/1828843.png" width="20px">
   </a>`;
+  newShortcutFormReset();
+  newTabOpen();
+  iconCorners();
+  shortcuts = document.querySelectorAll(".shortcut");
+  shortcutDelete = document.querySelectorAll(".shortcut-delete");
+});
+
+// New Shortcut form reset
+function newShortcutFormReset() {
   addShortcutForm.reset();
   addFormBtn.disabled = true;
   previewImage.src = "https://cdn-icons-png.flaticon.com/128/1006/1006771.png";
   newShortcutBox.style.width = "0px";
-});
+  timeContainer.style.display = "flex";
+  msgContainer.style.display = "block";
+  searchContainer.style.display = "block";
+  shortcutContainer.style.display = "grid";
+  openSettingBtn.style.visibility = "visible";
+  containerBlur();
+}
 
 // <--------------------------------  General  Setting  -------------------------------->
 
