@@ -378,7 +378,6 @@ function layoutFunction() {
 
 // // Show Delete Shortcuts on right click
 // let shortcutDelete = document.querySelectorAll(".shortcut-delete");
-// let shortcuts = document.querySelectorAll(".shortcut");
 // shortcutContainer.addEventListener("contextmenu", function (event) {
 //   event.preventDefault();
 //   // Delete Shortcuts
