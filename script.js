@@ -142,8 +142,8 @@ function containerBlur() {
 // <--------------------------------  Time  Setting  -------------------------------->
 
 // Time Container Display
-let timeCheckbox = document.getElementById("time-checkbox"),
-  timeContainer = document.getElementById("time-container");
+let timeCheckbox = document.getElementById("time-checkbox");
+timeContainer = document.getElementById("time-container");
 
 timeCheckbox.addEventListener("change", timeContainerDisplay);
 function timeContainerDisplay() {
@@ -296,11 +296,10 @@ function shortcutContainerDisplay() {
 
 // Open shortcuts in new tab
 let newTabShortcutCheckbox = document.getElementById("newTab-checkbox");
+let shortcuts = document.querySelectorAll(".shortcut");
 
 newTabShortcutCheckbox.addEventListener("change", newTabOpen);
 function newTabOpen() {
-  let shortcuts = document.querySelectorAll(".shortcut");
-
   function addNewTab() {
     shortcuts.forEach((element) => {
       element.setAttribute("target", "_blank");
@@ -377,21 +376,14 @@ function layoutFunction() {
 }
 
 // // Show Delete Shortcuts on right click
-// let shortcutDelete = document.querySelectorAll(".shortcut-delete");
 // shortcutContainer.addEventListener("contextmenu", function (event) {
 //   event.preventDefault();
-//   // Delete Shortcuts
-//   shortcutDelete.forEach((element) => {
-//     element.style.transform = "scale(1)";
-//   });
-//   // shortcuts
-//   shortcuts.forEach((alpha) => {
-//     alpha.style.animation = "rotate .4s linear infinite";
-//     alpha.removeAttribute("href");
-//     alpha.addEventListener("click", function (e) {
-//       console.log(e.target);
+//   shortcuts.forEach((element) => {
+//     element.style.animation = "rotate .4s linear infinite";
+//     element.addEventListener("click", function (event) {
 //       event.preventDefault();
-//       alpha.remove();
+//       event.stopPropagation();
+//       element.remove();
 //     });
 //   });
 // });
@@ -400,16 +392,9 @@ function layoutFunction() {
 // document.body.addEventListener("click", function (e) {
 //   let clickInsideShortcutContainer = e.target.closest("#shortcut-container");
 //   if (!clickInsideShortcutContainer) {
-//     console.log("body clicked");
-//     shortcutDelete.forEach((element) => {
-//       element.style.transform = "scale(0)";
-//     });
-//     shortcuts.forEach((alpha) => {
-//       alpha.style.animation = "none";
-//       // alpha.setAttribute("href", "");
-//       alpha.removeEventListener("click", () => {
-//         console.log("remove");
-//       });
+//     shortcuts.forEach((element) => {
+//       element.style.animation = "none";
+//       element.removeEventListener("click");
 //     });
 //   }
 // });
