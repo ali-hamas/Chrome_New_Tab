@@ -1,6 +1,6 @@
 # Custom Chrome New Tab
 
-![Chrome New Tab](/New%20Tab.png)
+![Chrome New Tab](/Images/New%20Tab.png)
 
 ## Table of Contents
 
