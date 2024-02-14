@@ -2,8 +2,6 @@
 
 ![Chrome New Tab](/New%20Tab.png)
 
-This is a simple Netflix clone project created with pure HTML, CSS & JavaScript. It replicates the Netflix homepage.
-
 ## Table of Contents
 
 - [Demo](#demo)
@@ -15,7 +13,7 @@ This is a simple Netflix clone project created with pure HTML, CSS & JavaScript.
 
 ## Demo
 
-Go to my [portfolio website](http://alihamas.com/projects/chrome_new_tab/Demo) for Custom Chrome New Tab demo.
+Go to my [portfolio website](http://alihamas.com/projects/chrome_new_tab) for Custom Chrome New Tab demo.
 
 ## Features
 
