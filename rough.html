@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -37,6 +37,54 @@
       }
 
       showTime();
+    </script>
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Get Favicon Example</title>
+  </head>
+  <body>
+    <!-- Example URL input -->
+    <input type="text" id="urlInput" placeholder="Enter URL" />
+    <button onclick="getAndDisplayFavicon()">Get Favicon</button>
+
+    <!-- Display the fetched favicon URL -->
+    <div id="faviconOutput"></div>
+
+    <script>
+      var getFavicon = function () {
+        var favicon = undefined;
+        var nodeList = document.getElementsByTagName("link");
+        for (var i = 0; i < nodeList.length; i++) {
+          if (
+            nodeList[i].getAttribute("rel") == "icon" ||
+            nodeList[i].getAttribute("rel") == "shortcut icon"
+          ) {
+            favicon = nodeList[i].getAttribute("href");
+          }
+        }
+        return favicon;
+      };
+
+      function getAndDisplayFavicon() {
+        const urlInput = document.getElementById("urlInput");
+        const url = urlInput.value;
+
+        const faviconOutput = document.getElementById("faviconOutput");
+        const faviconUrl = getFavicon();
+
+        if (faviconUrl) {
+          // Display the fetched favicon URL
+          faviconOutput.textContent = `Favicon URL: ${faviconUrl}`;
+        } else {
+          faviconOutput.textContent = "Favicon not found.";
+        }
+      }
     </script>
   </body>
 </html>

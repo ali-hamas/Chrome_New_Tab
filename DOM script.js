@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // New Tab Search
   let savedNewTabSearch = localStorage.getItem("newTabSearch");
-  if (savedNewTabSearch === "true") {
+  if (savedNewTabSearch !== null && savedNewTabSearch === "true") {
     newTabSearchCheckbox.checked = true;
   }
 
@@ -82,6 +82,8 @@ document.addEventListener("DOMContentLoaded", function () {
       searchLogoChange();
     }
   }
+
+  // <--------------------------------  Shortcut  Setting  -------------------------------->
 
   // Shortcut Container Visibility
   const savedShortcutDisplay = localStorage.getItem("shortcutDisplay");
@@ -96,8 +98,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // New Tab Shortcuts
-  let savednewTabShortcut = localStorage.getItem("newTabShortcut");
-  if (savednewTabShortcut === "true") {
+  let savedNewTabShortcut = localStorage.getItem("new_tab_shortcut");
+  if (savedNewTabShortcut !== null && savedNewTabShortcut === "true") {
     newTabShortcutCheckbox.checked = true;
     newTabOpen();
   }
@@ -108,35 +110,40 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("icon-range").value = savedIconCorners;
     iconCorners();
   }
-});
 
-// Shortcut Layout
-let savedShortcutLayout = localStorage.getItem("shortcutLayout");
-if (savedShortcutLayout !== null) {
-  if (savedShortcutLayout === "radio4x2.checked") {
-    radio4x2.checked = true;
-  } else if (savedShortcutLayout === "radio6x2.checked") {
-    radio6x2.checked = true;
-  } else if (savedShortcutLayout === "radio4x3.checked") {
-    radio4x3.checked = true;
-  } else if (savedShortcutLayout === "radio5x3.checked") {
-    radio5x3.checked = true;
-  } else if (savedShortcutLayout === "radio6x3.checked") {
-    radio6x3.checked = true;
-  } else {
-    radio5x2.checked = true;
+  // Shortcut Layout
+  let savedShortcutLayout = localStorage.getItem("shortcutLayout");
+  if (savedShortcutLayout !== null) {
+    if (savedShortcutLayout === "radio4x2.checked") {
+      radio4x2.checked = true;
+    } else if (savedShortcutLayout === "radio6x2.checked") {
+      radio6x2.checked = true;
+    } else if (savedShortcutLayout === "radio4x3.checked") {
+      radio4x3.checked = true;
+    } else if (savedShortcutLayout === "radio5x3.checked") {
+      radio5x3.checked = true;
+    } else if (savedShortcutLayout === "radio6x3.checked") {
+      radio6x3.checked = true;
+    } else {
+      radio5x2.checked = true;
+    }
+    layoutFunction();
   }
-  layoutFunction();
-}
-// Hot Corner
-let savedHotCorner = localStorage.getItem("hotCorner");
-if (savedHotCorner !== null) {
-  if (savedHotCorner === "true") {
-    document.getElementById("hot-corners-checkbox").checked = true;
-    hotCorner();
-  } else {
-    document.getElementById("hot-corners-checkbox").checked = false;
+  newShortcutBtn.addEventListener("click", showNewShortcutBox);
+
+  let savedShortcutContainer = localStorage.getItem("shortcut-container");
+  if (savedShortcutContainer !== null) {
+    shortcutContainer.innerHTML = savedShortcutContainer;
   }
-} else {
-  hotCorner();
-}
+  let savedTask = localStorage.getItem("task");
+  if (savedTask !== null) {
+    addedTasksDiv.innerHTML = savedTask;
+    deleteTaskFunction();
+    doneTaskFunction();
+  }
+  let savedNotes = localStorage.getItem("notes");
+  if (savedNotes !== null) {
+    addedNotesDiv.innerHTML = savedNotes;
+    deleteNoteFunction();
+  }
+});

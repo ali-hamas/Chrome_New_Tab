@@ -129,6 +129,7 @@ body {
   max-height: 300px;
   overflow: hidden;
   transition: all 0.3s ease;
+  user-select: none;
 }
 
 .shortcut {
@@ -142,6 +143,7 @@ body {
   background-color: transparent;
   position: relative;
   cursor: pointer;
+  user-select: none;
 }
 
 .shortcut:hover {
@@ -159,19 +161,12 @@ body {
   flex-direction: column;
   background-color: transparent;
   cursor: pointer;
+  user-select: none;
 }
 
 #new-shortcut:hover {
   background: rgb(255, 255, 255, 0.35);
   backdrop-filter: blur(10px);
-}
-
-.shortcut-delete {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  transition: all.3s ease;
-  transform: scale(0);
 }
 
 .shortcut-icon {
@@ -185,6 +180,7 @@ body {
   background-color: rgba(255, 255, 255);
   overflow: hidden;
   transition: all 0.3s ease;
+  user-select: none;
 }
 
 .shortcut-icon img {
@@ -218,6 +214,7 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  user-select: none;
 }
 
 /* Add new Shortcut */
@@ -244,6 +241,20 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.75);
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(20px);
+  position: relative;
+}
+
+.close-add-shortcut-box {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  filter: invert(90%);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.close-add-shortcut-box:hover {
+  filter: invert(100%);
 }
 
 .add-shortcut-box-inner h2.add-shortcut-title {
@@ -336,6 +347,296 @@ body {
   transition: all 0.3s ease;
 }
 
+/* Taks & Notes open buttons */
+.open-notes,
+.open-tasks {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 10px 10px 10px 10px;
+  height: 60px;
+  width: 52px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.open-notes {
+  top: 60px;
+}
+
+.open-notes:hover,
+.open-tasks:hover {
+  width: 115px;
+}
+
+.open-notes:hover .app-title,
+.open-tasks:hover .app-title {
+  width: 53px;
+  margin-left: 10px;
+}
+
+.app-title {
+  width: 0px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 18px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Tasks */
+.tasks-pane {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 0px;
+  height: 100vh;
+  background-color: transparent;
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.tasks-pane-inner {
+  width: 100%;
+  height: 100%;
+  padding: 15px 15px 15px 0px;
+}
+.tasks-box {
+  width: 100%;
+  padding: 15px 20px;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+  display: flex;
+  flex-direction: column;
+}
+.tasks-box {
+  height: 100%;
+  gap: 20px;
+}
+.app-heading {
+  font-size: 24px;
+  font-weight: 600;
+}
+.tasks-box form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.tasks-box form input[type="text"] {
+  width: 100%;
+  padding: 10px 20px;
+  background-color: transparent;
+  border: 1px solid rgb(255, 255, 255, 0.75);
+  border-right: none;
+  outline: none;
+  border-top-left-radius: 9999px;
+  border-bottom-left-radius: 9999px;
+  font-size: 14px;
+  color: #fff;
+}
+.tasks-box form button {
+  padding: 10px 20px;
+  background-color: #f7a70a;
+  border: 1px solid rgb(255, 255, 255, 0.75);
+  border-top-right-radius: 9999px;
+  border-bottom-right-radius: 9999px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.added-tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.task {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  position: relative;
+  padding: 0 40px;
+}
+.task .task-checkbox + label {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 1px solid rgb(255, 255, 255);
+  color: transparent;
+  font-size: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: absolute;
+  left: 10px;
+  top: 4px;
+  user-select: none;
+}
+.task-checkbox:checked + label {
+  color: #fff;
+  background-color: #f7a707;
+  border: 1px solid #f7a707;
+}
+
+.task .task-text {
+  font-size: 15px;
+  color: #fff;
+}
+.task .delete-task {
+  font-size: 15px;
+  font-weight: 900;
+  position: absolute;
+  right: 10px;
+  top: 0px;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Notes */
+.notes-pane {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 0px;
+  height: 100vh;
+  max-height: 100vh;
+  background-color: transparent;
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+.notes-pane-inner {
+  width: 100%;
+  height: 100%;
+  padding: 15px 15px 15px 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.notes-box-one {
+  width: 100%;
+  padding: 15px 20px;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+}
+
+.notes-box-one form.notes-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 5px;
+}
+form.notes-form input[type="text"],
+form.notes-form textarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: white;
+  resize: none;
+}
+form.notes-form .notes-title-input {
+  font-size: 18px;
+  font-weight: 600;
+}
+form.notes-form .notes-desc-input {
+  font-size: 14px;
+  font-weight: 400;
+}
+form.notes-form button:disabled {
+  font-size: 16px;
+  font-weight: 600;
+  background-color: transparent;
+  color: #cccccca6;
+  border: 1px solid #cccccca6;
+  padding: 7px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  width: 140px;
+  margin-left: auto;
+  cursor: default;
+}
+form.notes-form button {
+  font-size: 16px;
+  font-weight: 600;
+  padding: 7px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  width: 140px;
+  margin-left: auto;
+  cursor: pointer;
+  background-color: #f7a707;
+  border: 1px solid #f7a707;
+}
+
+/* Added note */
+.added-notes-div {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.notes-box {
+  width: 100%;
+  padding: 15px 20px;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.notes-box .added-note-title {
+  font-size: 18px;
+  font-weight: 600;
+  padding-right: 30px;
+}
+.notes-box .added-note-desc {
+  font-size: 14px;
+  font-weight: 400;
+}
+.notes-box .note-delete {
+  position: absolute;
+  right: 19px;
+  top: 19px;
+  font-size: 13px;
+  font-weight: 900;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  border-radius: 50%;
+  background-color: #f7a707;
+  cursor: pointer;
+  user-select: none;
+}
+
 /* Setting */
 #open-setting {
   position: fixed;
@@ -369,10 +670,6 @@ body {
   scrollbar-width: none;
 }
 
-#setting-box::-webkit-scrollbar {
-  display: none;
-}
-
 .setting-inner {
   width: 100%;
   min-width: 350px;
@@ -397,7 +694,7 @@ body {
 
 h2.setting-sec-heading {
   font-size: 24px;
-  font-weight: 500;
+  font-weight: 600;
   text-align: center;
   margin-bottom: 5px;
 }

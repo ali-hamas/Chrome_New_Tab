@@ -89,9 +89,8 @@ function openSetting() {
 
 // Close Setting on Outside Click
 window.onclick = function (event) {
-  var clickInsideSetting = event.target.closest("#setting-box") !== null;
-  var clickInsideOpenSettingBtn =
-    event.target.closest("#open-setting") !== null;
+  let clickInsideSetting = event.target.closest("#setting-box");
+  let clickInsideOpenSettingBtn = event.target.closest("#open-setting");
   if (!clickInsideSetting && !clickInsideOpenSettingBtn) {
     settingBox.style.width = "0px";
     setTimeout(() => {
@@ -99,18 +98,33 @@ window.onclick = function (event) {
     }, 300);
   }
 
+  // Close Tasks
+  let insideOpenTasksBtn = event.target.closest(".open-tasks");
+  let insideTasksPane = event.target.closest(".tasks-pane");
+  if (!insideOpenTasksBtn && !insideTasksPane) {
+    tasksPane.style.width = "0px";
+  }
+
+  // Close Notes
+  let insideOpenNotesBtn = event.target.closest(".open-notes");
+  let insideNotesPane = event.target.closest(".notes-pane");
+  if (!insideOpenNotesBtn && !insideNotesPane) {
+    notesPane.style.width = "0px";
+  }
+
+  if (tasksPane.style.width > "1px" || notesPane.style.width > "1px") {
+    openTasksBtn.style.display = "none";
+    openNotesBtn.style.display = "none";
+  } else {
+    openTasksBtn.style.display = "flex";
+    openNotesBtn.style.display = "flex";
+  }
+
   // Reset Box Visibility
-  var clickInsideSureBox = event.target.closest("#sure-reset") !== null;
+  let clickInsideSureBox = event.target.closest("#sure-reset") !== null;
   if (!clickInsideSureBox && event.target !== resetBtn) {
     sureBox.style.height = "0px";
     sureBox.style.padding = "0px";
-  }
-
-  // Hide New Shortcut
-  var clickInsideNewShortcutBox = event.target.closest("#add-shortcut-box");
-  var clickInsideNewShortcutBtn = event.target.closest("#new-shortcut");
-  if (!clickInsideNewShortcutBox && !clickInsideNewShortcutBtn) {
-    newShortcutFormReset();
   }
 };
 
@@ -300,22 +314,16 @@ let shortcuts = document.querySelectorAll(".shortcut");
 
 newTabShortcutCheckbox.addEventListener("change", newTabOpen);
 function newTabOpen() {
-  function addNewTab() {
+  if (newTabShortcutCheckbox.checked) {
     shortcuts.forEach((element) => {
       element.setAttribute("target", "_blank");
     });
-  }
-  function removeNewTab() {
+    localStorage.setItem("new_tab_shortcut", "true");
+  } else {
     shortcuts.forEach((element) => {
       element.removeAttribute("target");
     });
-  }
-  newTabShortcutCheckbox.checked ? addNewTab() : removeNewTab();
-
-  if (newTabShortcutCheckbox.checked) {
-    localStorage.setItem("newTabShortcut", newTabShortcutCheckbox.checked);
-  } else {
-    localStorage.removeItem("newTabShortcut");
+    localStorage.removeItem("new_tab_shortcut");
   }
 }
 
@@ -402,8 +410,9 @@ function layoutFunction() {
 // Show New Shortcut box
 let newShortcutBox = document.getElementById("add-shortcut-box");
 let newShortcutBtn = document.getElementById("new-shortcut");
-document.addEventListener("click", showNewShortcutBox);
-function showNewShortcutBox(event) {
+newShortcutBtn.addEventListener("click", showNewShortcutBox);
+newShortcutBtn.addEventListener("dblclick", showNewShortcutBox);
+function showNewShortcutBox() {
   newShortcutBox.style.width = "400px";
   container.style.backdropFilter = "blur(20px)";
   timeContainer.style.display = "none";
@@ -411,6 +420,26 @@ function showNewShortcutBox(event) {
   searchContainer.style.display = "none";
   shortcutContainer.style.display = "none";
   openSettingBtn.style.visibility = "hidden";
+  openTasksBtn.style.visibility = "hidden";
+  openNotesBtn.style.visibility = "hidden";
+}
+
+// Hide New Shortcut Box
+let hideNewShortcutBtn = document.querySelector(".close-add-shortcut-box");
+hideNewShortcutBtn.addEventListener("click", newShortcutFormReset);
+function newShortcutFormReset() {
+  addShortcutForm.reset();
+  addFormBtn.disabled = true;
+  previewImage.src = "https://cdn-icons-png.flaticon.com/128/1006/1006771.png";
+  newShortcutBox.style.width = "0px";
+  timeContainer.style.display = "flex";
+  msgContainer.style.display = "block";
+  searchContainer.style.display = "block";
+  shortcutContainer.style.display = "grid";
+  openSettingBtn.style.visibility = "visible";
+  openTasksBtn.style.visibility = "visible";
+  openNotesBtn.style.visibility = "visible";
+  containerBlur();
 }
 
 // Form Button disable
@@ -445,7 +474,7 @@ const previewImage = document.getElementById("preview-img");
 let newShortcutIconUrl =
   "https://cdn-icons-png.flaticon.com/128/1006/1006771.png";
 formUrlInput.addEventListener("input", function () {
-  newShortcutIconUrl = `https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${formUrlInput.value}&size=256`;
+  newShortcutIconUrl = `https://s2.googleusercontent.com/s2/favicons?domain=${formUrlInput.value}&sz=256`;
   previewImage.src = newShortcutIconUrl;
 });
 
@@ -461,8 +490,8 @@ addShortcutForm.addEventListener("submit", function (event) {
   <img src="${newShortcutIconUrl}">
   </div>
   <div class="shortcut-title">${formNameInput.value}</div>
-  <img class="shortcut-delete" src="https://cdn-icons-png.flaticon.com/128/1828/1828843.png" width="20px">
   </a>`;
+  localStorage.setItem("shortcut-container", shortcutContainer.innerHTML);
   newShortcutFormReset();
   newTabOpen();
   iconCorners();
@@ -470,44 +499,7 @@ addShortcutForm.addEventListener("submit", function (event) {
   shortcutDelete = document.querySelectorAll(".shortcut-delete");
 });
 
-// New Shortcut form reset
-function newShortcutFormReset() {
-  addShortcutForm.reset();
-  addFormBtn.disabled = true;
-  previewImage.src = "https://cdn-icons-png.flaticon.com/128/1006/1006771.png";
-  newShortcutBox.style.width = "0px";
-  timeContainer.style.display = "flex";
-  msgContainer.style.display = "block";
-  searchContainer.style.display = "block";
-  shortcutContainer.style.display = "grid";
-  openSettingBtn.style.visibility = "visible";
-  containerBlur();
-}
-
 // <--------------------------------  General  Setting  -------------------------------->
-
-function hoverOpen(event) {
-  const cursorX = event.clientX;
-  const cursorY = event.clientY;
-  // console.log(`X = ${cursorX} and Y = ${cursorY}`);
-  if (cursorX === 0 && cursorY > window.innerHeight - 100) {
-    openSetting();
-  } else if (cursorX === window.innerWidth - 1 && cursorY < 100) {
-    openSetting();
-  }
-}
-
-// Hot Corner Settings
-let hotCornerCheckox = document.getElementById("hot-corners-checkbox");
-hotCornerCheckox.addEventListener("change", hotCorner);
-function hotCorner() {
-  if (!hotCornerCheckox.checked) {
-    document.removeEventListener("mousemove", hoverOpen);
-  } else {
-    document.addEventListener("mousemove", hoverOpen);
-  }
-  localStorage.setItem("hotCorner", hotCornerCheckox.checked);
-}
 
 // Setting Reset
 let resetBtn = document.getElementById("reset-setting-btn");

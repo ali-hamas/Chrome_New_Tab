@@ -124,8 +124,14 @@
           <div class="shortcut-title">Add shortcut</div>
         </a>
       </div>
+      <!-- Add Shortcut Form -->
       <div id="add-shortcut-box">
         <div class="add-shortcut-box-inner">
+          <img
+            class="close-add-shortcut-box"
+            src="https://cdn-icons-png.flaticon.com/128/9684/9684650.png"
+            width="15px"
+          />
           <h2 class="add-shortcut-title">Add Shortcut</h2>
           <div class="shortcut-icon">
             <img
@@ -162,6 +168,91 @@
         </div>
       </div>
     </div>
+
+    <!----------------------------------------  Tasks  ---------------------------------------->
+    <div class="open-tasks">
+      <div class="tasks-img">
+        <img
+          src="https://cdn-icons-png.flaticon.com/128/9809/9809689.png"
+          width="30px"
+        />
+      </div>
+      <div class="app-title">Tasks</div>
+    </div>
+
+    <!-- Tasks -->
+    <div class="tasks-pane">
+      <div class="tasks-pane-inner">
+        <div class="tasks-box">
+          <h1 class="app-heading">Tasks</h1>
+          <form class="add-task-form" autocomplete="off">
+            <input
+              type="text"
+              class="task-input"
+              placeholder="Add your task"
+              required
+            />
+            <button type="submit">ADD</button>
+          </form>
+          <div class="added-tasks">
+            <!-- <div class="task">
+              <input type="checkbox" id="task-checkbox" class="task-checkbox" />
+              <label for="task-checkbox">&#10003; </label>
+              <p class="task-text">Added task shown here</p>
+              <p class="delete-task">&#10005;</p>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!----------------------------------------  Notes  ---------------------------------------->
+    <div class="open-notes">
+      <div class="notes-img">
+        <img
+          src="https://cdn-icons-png.flaticon.com/128/3387/3387271.png"
+          width="30px"
+        />
+      </div>
+      <div class="app-title">Notes</div>
+    </div>
+
+    <!-- Notes -->
+    <div class="notes-pane">
+      <div class="notes-pane-inner">
+        <div class="notes-box-one">
+          <h1 class="app-heading">Add New Note</h1>
+          <form class="notes-form">
+            <input
+              type="text"
+              class="notes-title-input"
+              placeholder="Title"
+              required
+            />
+            <textarea
+              class="notes-desc-input"
+              placeholder="Description"
+              rows="2"
+              required
+            ></textarea>
+            <button type="submit" class="notes-form-submit" disabled>
+              Add Note
+            </button>
+          </form>
+        </div>
+        <div class="added-notes-div">
+          <!-- Added Note -->
+          <!-- <div class="notes-box">
+            <div class="added-note-title">Added Note Title 1</div>
+            <div class="added-note-desc">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit
+            </div>
+            <div class="note-delete">&#10005;</div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+
     <!----------------------------------------  Setting  ---------------------------------------->
     <div id="open-setting">
       <svg
@@ -434,18 +525,6 @@
         <!-- ---------------------------General Setting Section--------------------------- -->
         <div class="setting-section">
           <h2 class="setting-sec-heading">General Settings</h2>
-          <!-- Hot Corner -->
-          <div class="setting-tile">
-            <div class="setting-tile-content">
-              <h3 class="setting-tile-heading">Hot Corners</h3>
-              <div class="setting-checkbox">
-                <label class="switch">
-                  <input type="checkbox" id="hot-corners-checkbox" checked />
-                  <span class="slider round"></span>
-                </label>
-              </div>
-            </div>
-          </div>
           <!-- Reset Settings -->
           <div class="setting-tile">
             <div class="setting-tile-content">
@@ -468,5 +547,6 @@
 
     <script src="/script.js"></script>
     <script src="/DOM script.js"></script>
+    <script src="/notes & tasks.js"></script>
   </body>
 </html>
