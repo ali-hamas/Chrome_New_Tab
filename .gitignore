@@ -4,3 +4,5 @@ icon128.png
 manifest.json
 rough.html
 .DS_Store
+node_modules
+js.js

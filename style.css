@@ -144,6 +144,20 @@ body {
   position: relative;
   cursor: pointer;
   user-select: none;
+  animation: none 0.4s linear infinite;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(2deg);
+  }
+
+  100% {
+    transform: rotate(-2deg);
+  }
 }
 
 .shortcut:hover {
@@ -190,20 +204,6 @@ body {
 
 #new-shortcut .shortcut-icon img {
   width: 80%;
-}
-
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  50% {
-    transform: rotate(2deg);
-  }
-
-  100% {
-    transform: rotate(-2deg);
-  }
 }
 
 .shortcut-title {

@@ -129,11 +129,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     layoutFunction();
   }
+
   newShortcutBtn.addEventListener("click", showNewShortcutBox);
 
   let savedShortcutContainer = localStorage.getItem("shortcut-container");
   if (savedShortcutContainer !== null) {
     shortcutContainer.innerHTML = savedShortcutContainer;
+    shortcuts.forEach((element) => {
+      element.style.animation = "none";
+    });
   }
   let savedTask = localStorage.getItem("task");
   if (savedTask !== null) {

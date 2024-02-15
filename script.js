@@ -383,29 +383,29 @@ function layoutFunction() {
   }
 }
 
-// // Show Delete Shortcuts on right click
-// shortcutContainer.addEventListener("contextmenu", function (event) {
-//   event.preventDefault();
-//   shortcuts.forEach((element) => {
-//     element.style.animation = "rotate .4s linear infinite";
-//     element.addEventListener("click", function (event) {
-//       event.preventDefault();
-//       event.stopPropagation();
-//       element.remove();
-//     });
-//   });
-// });
+// Shortcut Delete
+shortcutContainer.addEventListener("contextmenu", function (event) {
+  event.preventDefault();
+  console.log("contextmenu");
+  shortcuts.forEach((element) => {
+    element.style.animation = "rotate .4s linear infinite";
+    element.addEventListener("click", removeShortcut);
+  });
+});
 
-// // Hide Delete Shortcuts on right click
-// document.body.addEventListener("click", function (e) {
-//   let clickInsideShortcutContainer = e.target.closest("#shortcut-container");
-//   if (!clickInsideShortcutContainer) {
-//     shortcuts.forEach((element) => {
-//       element.style.animation = "none";
-//       element.removeEventListener("click");
-//     });
-//   }
-// });
+function removeShortcut(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  this.remove();
+  localStorage.setItem("shortcut-container", shortcutContainer.innerHTML);
+}
+
+document.body.addEventListener("click", function () {
+  shortcuts.forEach((element) => {
+    element.style.animation = "none";
+    element.removeEventListener("click", removeShortcut);
+  });
+});
 
 // Show New Shortcut box
 let newShortcutBox = document.getElementById("add-shortcut-box");
@@ -442,7 +442,7 @@ function newShortcutFormReset() {
   containerBlur();
 }
 
-// Form Button disable
+// Add Shortcut Form Validation
 let formNameInput = document.getElementById("form-name-input");
 let formUrlInput = document.getElementById("form-url-input");
 let addFormBtn = document.getElementById("done-shortcut-btn");
@@ -451,20 +451,22 @@ formNameInput.addEventListener("input", formButtomValidation);
 formUrlInput.addEventListener("input", formButtomValidation);
 formUrlInput.addEventListener("input", httpValidation);
 function formButtomValidation() {
-  formNameInput.value.length > 0
-    ? (addFormBtn.disabled = false)
-    : (addFormBtn.disabled = true);
-  formUrlInput.value.length > 0
-    ? (addFormBtn.disabled = false)
-    : (addFormBtn.disabled = true);
-}
-function httpValidation() {
-  let formUrlValue = formUrlInput.value;
-  if (formUrlValue.includes("https://") || formUrlValue.includes("http://")) {
+  if (
+    formUrlInput.value.includes("http://") ||
+    (formUrlInput.value.includes("https://") && formNameInput.value.length > 0)
+  ) {
     addFormBtn.disabled = false;
-    document.querySelector(".http-error").style.display = "none";
   } else {
     addFormBtn.disabled = true;
+  }
+}
+function httpValidation() {
+  if (
+    formUrlInput.value.includes("http://") ||
+    formUrlInput.value.includes("https://")
+  ) {
+    document.querySelector(".http-error").style.display = "none";
+  } else {
     document.querySelector(".http-error").style.display = "block";
   }
 }
