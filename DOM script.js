@@ -1,4 +1,73 @@
 document.addEventListener("DOMContentLoaded", function () {
+  let hourID = document.getElementById("hour"),
+    minID = document.getElementById("min"),
+    zoneID = document.getElementById("zone"),
+    dayTimeID = document.getElementById("dayTime");
+
+  setInterval(() => {
+    let a = new Date(),
+      bHour = a.getHours(),
+      hour = 0,
+      bMin = a.getMinutes(),
+      min = 0;
+
+    //Hour format
+    function hourFormat() {
+      if (Radio12Hr.checked) {
+        bHour === 0
+          ? (hour = 12)
+          : bHour > 12
+          ? (hour = bHour - 12)
+          : (hour = bHour);
+      } else {
+        hour = bHour;
+      }
+    }
+
+    // Time Zone
+    function timeZone() {
+      if (Radio12Hr.checked === true) {
+        if (bHour > 11) {
+          zoneID.innerHTML = "PM";
+        } else {
+          zoneID.innerHTML = "AM";
+        }
+      } else if (Radio12Hr.checked === false) {
+        zoneID.innerHTML = "";
+      }
+    }
+
+    // Day Time
+    function dayTime() {
+      if (bHour >= 5 && bHour < 12) {
+        dayTimeID.innerHTML = "Good Morning, ";
+      } else if (bHour >= 12 && bHour < 16) {
+        dayTimeID.innerHTML = "Good After Noon, ";
+      } else if (bHour >= 16 && bHour < 21) {
+        dayTimeID.innerHTML = "Good Evening, ";
+      } else {
+        dayTimeID.innerHTML = "Good Night, ";
+      }
+    }
+
+    // Adding 0 to minutes
+    function adding0() {
+      bMin < 10 ? (min = `0${bMin}`) : (min = bMin);
+      if (Radio24Hr.checked) {
+        bHour < 10 ? (hour = `0${bHour}`) : (hour = bHour);
+      }
+    }
+
+    hourFormat();
+    timeZone();
+    dayTime();
+    adding0();
+
+    // Printing Time
+    hourID.innerHTML = hour;
+    minID.innerHTML = min;
+  }, 1000);
+
   // Dim Container
   const savedDimValue = localStorage.getItem("dim");
   if (savedDimValue !== null) {

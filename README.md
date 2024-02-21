@@ -1,6 +1,6 @@
 # Custom Chrome New Tab
 
-![Chrome New Tab](/Images/New%20Tab.png)
+![Chrome New Tab](/project_img.png)
 
 ## Table of Contents
 
@@ -13,7 +13,7 @@
 
 ## Demo
 
-Go to my [portfolio website](http://alihamas.com/projects/chrome_new_tab) for Custom Chrome New Tab demo.
+Go to my [portfolio website](https://www.alihamas.com/projects/chrome_new_tab/) for Custom Chrome New Tab demo.
 
 ## Features
 
