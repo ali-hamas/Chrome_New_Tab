@@ -1,15 +1,11 @@
 // Selecting Clock ID's
-let hourID = document.getElementById("hour"),
-  minID = document.getElementById("min"),
+let timeID = document.getElementById("time"),
   zoneID = document.getElementById("zone"),
-  dayID = document.getElementById("day"),
-  dateID = document.getElementById("date"),
-  monthID = document.getElementById("month"),
-  yearID = document.getElementById("year"),
   dayTimeID = document.getElementById("dayTime");
 
-setInterval(() => {
-  let a = new Date(),
+// Time Function
+function startTime() {
+    let a = new Date(),
     bHour = a.getHours(),
     hour = 0,
     bMin = a.getMinutes(),
@@ -21,8 +17,8 @@ setInterval(() => {
       bHour === 0
         ? (hour = 12)
         : bHour > 12
-        ? (hour = bHour - 12)
-        : (hour = bHour);
+          ? (hour = bHour - 12)
+          : (hour = bHour);
     } else {
       hour = bHour;
     }
@@ -68,9 +64,11 @@ setInterval(() => {
   adding0();
 
   // Printing Time
-  hourID.innerHTML = hour;
-  minID.innerHTML = min;
-}, 1000);
+  timeID.innerHTML = `${hour}:${min}`
+  setTimeout(startTime, 1000);
+}
+document.body.onload = startTime();
+document.body.onload = BatteryFunction();
 
 window.onclick = function (event) {
   // Close Setting on Outside Click
@@ -237,7 +235,7 @@ addShortcutForm.addEventListener("submit", function (event) {
 });
 
 // Battery Script
-setInterval(() => {
+function BatteryFunction(){
   navigator.getBattery().then((battery) => {
     let batteryLevel = Math.round(battery.level * 100);
     let batteryInner = document.querySelector(".battery-inner");
@@ -255,8 +253,9 @@ setInterval(() => {
     } else {
       batteryInner.style.background = "#16a34a";
     }
+    setInterval(BatteryFunction, 1000)
   });
-}, 1000);
+}
 
 // Network Script
 let networkImg = document.querySelector(".network-img");
@@ -266,53 +265,3 @@ window.addEventListener("offline", function () {
 window.addEventListener("online", function () {
   networkImg.src = "https://cdn-icons-png.flaticon.com/128/11433/11433365.png";
 });
-
-// Weather Script
-const apiKey = "db499ac39e76a04aacc125fd196e09be";
-const apiUnit = "metric";
-const apiURL = `https://api.openweathermap.org/data/2.5/weather?appid=${apiKey}&units=${apiUnit}`;
-window.onload = () => {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        let currentLatitude = position.coords.latitude;
-        let currentLongitude = position.coords.longitude;
-        fetch(`${apiURL}&lat=${currentLatitude}&lon=${currentLongitude}`)
-          .then((response) => response.json())
-          .then((data) => {
-            let temp = Math.round(data.main.temp);
-            document.querySelector(
-              ".tempratue"
-            ).innerHTML = `${temp} <span class="temp-unit"><span class="degree">°</span>C</span>`;
-            let weatherIcon = document.querySelector(".weather-img");
-            let id = data.weather[0].id;
-            if (id == 800) {
-              weatherIcon.src =
-                "https://alihamas.vercel.app/projects/weather_forecast/Images/bright.png";
-            } else if (id >= 200 && id <= 232) {
-              weatherIcon.src =
-                "https://alihamas.vercel.app/projects/weather_forecast/Images/dizzle.png";
-            } else if (id >= 600 && id <= 622) {
-              weatherIcon.src =
-                "https://alihamas.vercel.app/projects/weather_forecast/Images/snow.png";
-            } else if (id >= 701 && id <= 781) {
-              weatherIcon.src =
-                "https://alihamas.vercel.app/projects/weather_forecast/Images/mist.png";
-            } else if (id >= 801 && id <= 804) {
-              weatherIcon.src =
-                "https://alihamas.vercel.app/projects/weather_forecast/Images/cloudy.png";
-            } else if ((id >= 500 && id <= 531) || (id >= 300 && id <= 321)) {
-              weatherIcon.src =
-                "https://alihamas.vercel.app/projects/weather_forecast/Images/rain.png";
-            }
-            document.querySelector(".weather-details").style.display = "flex";
-          });
-      },
-      (error) => {
-        alert(
-          `${error.message}. Please allow location to show Weather details.`
-        );
-      }
-    );
-  }
-};
